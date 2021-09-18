@@ -15,10 +15,17 @@ function App() {
     });
   }, []);
 
-  function handleAddProject() {
-    setProjects([...projects, `Novo projeto ${Date.now()}`]);
+  async function handleAddProject() {
+    //setProjects([...projects, `Novo projeto ${Date.now()}`]);
 
-    console.log (projects);
+      const res = await api.post('projects', {
+      title: `Novo projeto ${Date.now()}`,
+      owner: "Lucas Castro"
+    });
+
+    const project = res.data
+
+    setProjects([...projects, project]);
   }
 
   return( 
